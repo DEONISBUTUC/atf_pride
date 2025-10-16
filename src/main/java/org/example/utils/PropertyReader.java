@@ -18,19 +18,24 @@ import java.util.Properties;
 public class PropertyReader {
 
     private static final String DEFAULT_FILE = "application.properties";
+    private static final String ENV_KEY = "env";
+    private static final String PROFILES_PATTERN = "profiles/%s-env/application-%s.properties";
+
     private static final PropertyReader INSTANCE = new PropertyReader();
     private final Properties properties = new Properties();
 
     private PropertyReader() {
-        try (InputStream input = getClass().getClassLoader().getResourceAsStream(DEFAULT_FILE)) {
-            if (input == null) {
-                System.err.println("Could not find " + DEFAULT_FILE);
-            } else {
-                properties.load(input);
-            }
-        } catch (IOException e) {
-            System.err.println("Failed to load properties: " + e.getMessage());
+        loadFromClasspath(DEFAULT_FILE);
+
+        String environment = properties.getProperty(ENV_KEY);
+        if (environment == null || environment.isBlank()) {
+            throw new IllegalStateException("Missing 'env' key in " + DEFAULT_FILE);
         }
+
+        String environmentFilePath = String.format(PROFILES_PATTERN, environment, environment);
+        loadFromClasspath(environmentFilePath);
+
+
     }
 
     public static PropertyReader getInstance() {
@@ -61,4 +66,16 @@ public class PropertyReader {
         }
         return Boolean.parseBoolean(value);
     }
+
+    private void loadFromClasspath(String filePath) {
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream(filePath)) {
+            if (input == null) {
+                throw new IllegalStateException("Configuration file not found on classpath: " + filePath);
+            }
+            properties.load(input);
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading configuration file: " + filePath, e);
+        }
+    }
+
 }

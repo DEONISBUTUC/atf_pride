@@ -27,7 +27,7 @@ public class UnitSandboxTest {
         assertEquals("chromium", propertyReader.getProperty("browser.type"));
         assertEquals(1366, propertyReader.getIntProperty("browser.viewport.size.width"));
         assertEquals(768, propertyReader.getIntProperty("browser.viewport.size.height"));
-        assertEquals(2500, propertyReader.getIntProperty("browser.slow.mo"));
+        assertEquals(4500, propertyReader.getIntProperty("browser.slow.mo"));
         assertFalse(propertyReader.getBooleanProperty("browser.headless"));
 
         assertEquals(10000, propertyReader.getIntProperty("timeout.default.ms"));
