@@ -1,8 +1,7 @@
 package org.example.hooks;
 
-import com.microsoft.playwright.*;
 import io.cucumber.java.*;
-import org.example.browser.BrowserFactory;
+import org.example.browser.BrowserInstance;
 import org.example.context.ScenarioContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +16,7 @@ public class Hooks {
     private static final Logger logger = LoggerFactory.getLogger(Hooks.class);
 
     private ScenarioContext scenarioContext;
-    private BrowserFactory browserFactory;
+    private BrowserInstance browserFactory;
 
 
     @Before

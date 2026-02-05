@@ -30,6 +30,9 @@ public class FrameworkProperties {
     @Value("${timeout.default.ms}")
     private int defaultTimeoutMs;
 
+    @Value("${app.userphone}")
+    private String userphone;
+
     public String getEnv() {
         return env;
     }
@@ -57,6 +60,8 @@ public class FrameworkProperties {
     public int getSlowMoMs() {
         return slowMoMs;
     }
+
+    public String getUserphone() {return userphone;}
 
     public int getDefaultTimeoutMs() {
         return defaultTimeoutMs;
