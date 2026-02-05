@@ -1,0 +1,6 @@
+email ,generateRandomEmail()
+phoneNumber,079063127
+companyName,generateRandomCompanyName
+companyEmail,generateRandomEmail()
+productName,generateRandomProductName
+typeOfIssue,Produse/servicii nealimentare
