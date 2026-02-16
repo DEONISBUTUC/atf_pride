@@ -1,0 +1,10 @@
+package com.democracy.qa.util;
+
+public enum SCKey {
+    ADMIN_SESSION_TOKEN,
+    PROVIDER_SESSION_TOKEN,
+    SCENARIO_DATASET,
+    REQUEST_PARAMS,
+    BROWSER_CONTEXT,
+    STUB_MAPPING_LIST,
+}
